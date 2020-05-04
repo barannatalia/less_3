@@ -1,8 +1,5 @@
 package main.java.home_task.homeTask_2;
 
-import com.sun.xml.internal.ws.api.model.wsdl.WSDLOutput;
-import org.w3c.dom.ls.LSOutput;
-
 /**
  * Реализовать функцию, которая принимает строку и возвращает ее же в обратном виде
  * например "Hello world!!!" -> "!!!dlrow olleH"
