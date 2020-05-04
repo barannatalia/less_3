@@ -7,13 +7,16 @@ public class Task_1 {
         System.out.println("minimum: " + min(5,3,3));
     }
     public static int min(int a, int b, int c) {
-        int minimum;
-        if (a < b && a < c) {
-            minimum = a;
-        } else if (b < a & b < c) {
-            minimum = b;
-        } else minimum = c;
-        return minimum;
+//----------------short
+        return a < b ? (a < c ? a : c) : (b < c ? b : c);
+//----------------long
+//        int minimum;
+//        if (a < b && a < c) {
+//            minimum = a;
+//        } else if (b < a & b < c) {
+//            minimum = b;
+//        } else minimum = c;
+//        return minimum;
     }
 }
 
