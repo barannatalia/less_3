@@ -80,6 +80,7 @@ public class HomePage extends BasePage{
         return this;
     }
     public List<WebElement> getListCategories() {
+        logger.info("Get categories");
         final List<WebElement> elements = driver.findElements((By) categories);
         return elements;
     }

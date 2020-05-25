@@ -35,9 +35,10 @@ public class FilterLaptop {
         this.laptop = laptop;
 
         By searchItem = By.cssSelector("input[id='" + laptop + "']");
-        logger.debug("Selector: " + laptop);
+        logger.debug("Selector: " + searchItem);
         WebElement webElement = wait.until(ExpectedConditions.visibilityOfElementLocated(searchItem));
 //        WebElement webElement = wait.until(ExpectedConditions.elementToBeClickable(searchItem));
+        driver.findElements((By) searchItem);
         webElement.click();
         logger.info("Click: " + laptop);
         By searchList = By.xpath("//span[contains(text(), '"  + laptop + "')]");

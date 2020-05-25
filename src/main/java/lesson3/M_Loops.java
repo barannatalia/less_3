@@ -21,10 +21,10 @@ public class M_Loops {
 //            i --;
 //            System.out.println("Hello");
 //        }
-        int i = 9;
-        do {
-            i--;
-            System.out.println("Hello");
-        }while (i>=0);
+//        int i = 9;
+//        do {
+//            i--;
+//            System.out.println("Hello");
+//        }while (i>=0);
     }
 }
