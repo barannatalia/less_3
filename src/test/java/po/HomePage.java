@@ -56,13 +56,14 @@ public class HomePage extends BasePage{
         wait.until(ExpectedConditions.elementToBeClickable(search));
         if( popup.size() > 0 ) {
             popupClose.click();
+            logger.info("Pop-up is closed");
         }
         search.clear();
+        logger.info("Clear");
         search.sendKeys(this.searchStr);
         search.sendKeys(Keys.ENTER);
-        //wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(searchResultItem)); //1
-        //wait.until(ExpectedConditions.visibilityOfElementLocated(searchResultItem)); // 2
-        wait.until(new ExpectedCondition<Boolean>() { // 3
+        logger.info("Press ENTER");
+        wait.until(new ExpectedCondition<Boolean>() {
             @Override
             public Boolean apply(WebDriver driver) {
                 int amount = driver.findElements(searchResultItem).size();
@@ -75,13 +76,14 @@ public class HomePage extends BasePage{
 
     public HomePage clickContacts() {
         logger.info("Click contacts");
+        logger.error("ERROR: " + contactBtn);
         wait.until(ExpectedConditions.elementToBeClickable(contactBtn));
         contactBtn.click();
+
         return this;
     }
     public List<WebElement> getListCategories() {
         logger.info("Get categories");
-        final List<WebElement> elements = driver.findElements((By) categories);
-        return elements;
+        return (List<WebElement>) driver.findElements((By) categories);
     }
 }

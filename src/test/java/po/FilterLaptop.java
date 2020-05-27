@@ -14,10 +14,12 @@ public class FilterLaptop {
     public Logger logger = LogManager.getLogger(FaqPage.class);
     private final WebDriver driver;
     private final WebDriverWait wait;
-    private String laptop="Apple";
+    private String laptop = "Apple";
+    private By searchItem;
+    private List<WebElement> elements;
 
 
-    public FilterLaptop (WebDriver driver) {
+    public FilterLaptop(WebDriver driver) {
         this.logger.trace("FilterLaptop initialized");
         this.driver = driver;
         this.wait = new WebDriverWait(this.driver, 10);
@@ -30,20 +32,22 @@ public class FilterLaptop {
         return this;
     }
 
-    public List<WebElement> getListLaptop(String laptop) {
-        logger.info("Find: " + laptop);
+    public int getListLaptop(String laptop) {
+        logger.info("Laptop: " + laptop);
         this.laptop = laptop;
-
-        By searchItem = By.cssSelector("input[id='" + laptop + "']");
-        logger.debug("Selector: " + searchItem);
-        WebElement webElement = wait.until(ExpectedConditions.visibilityOfElementLocated(searchItem));
-//        WebElement webElement = wait.until(ExpectedConditions.elementToBeClickable(searchItem));
-        driver.findElements((By) searchItem);
-        webElement.click();
+        if (laptop == "") logger.warn("Laptop is empty");
+        String search = "//a[@class='checkbox-filter__link']//input[@id='" + laptop + "']/..";
+        logger.debug("Selector: " + search);
+        searchItem = By.xpath(search);
         logger.info("Click: " + laptop);
-        By searchList = By.xpath("//span[contains(text(), '"  + laptop + "')]");
-        List<WebElement> elements = driver.findElements((By) searchList);
-        logger.info("Qty elements: " + elements.size());
-        return elements;
+        driver.findElements(searchItem).get(0).click();
+        By searchList = By.xpath("//span[contains(text(), '" + laptop + "')]");
+        logger.debug("searchList: " + searchList);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(searchList));
+        logger.info("Get list");
+        elements = driver.findElements(searchList);
+        if (elements.size() == 0)  logger.warn("List is empty");
+        logger.info("Qty elements: " + (elements.size() - 1));
+        return elements.size() - 1;
     }
 }

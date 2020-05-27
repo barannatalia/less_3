@@ -1,7 +1,9 @@
 package test.java;
 
+import main.java.home_task.homeTask_4.HomeTask_1;
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import test.java.po.ContactPage;
 import test.java.po.FaqPage;
@@ -33,7 +35,7 @@ public class Test_PO_Rozetka extends TestBaseSetup {
         homePage.clickContacts();
         contactPage.clickFaq();
         List<WebElement> webLinks = faqPage.getQuestions();
-        for (WebElement element: webLinks) {
+        for (WebElement element : webLinks) {
             String expectedColor = "rgba(62, 119, 170, 1)";
             String actualColor = element.getCssValue("color");
             assertEquals(expectedColor, actualColor);
@@ -58,15 +60,22 @@ public class Test_PO_Rozetka extends TestBaseSetup {
         assertEquals(16, webLinks.size());
     }
 
-    @Test
-    public void getListLaptop() {
-        filterLaptop.open()
-                .getListLaptop("Dell");
+    @Test(dataProvider = "laptop")
+    public void getListLaptop(String laptop, int expectedValue) {
+        int actualValue = filterLaptop.open().getListLaptop(laptop);
+        assertEquals(
+                actualValue,
+                expectedValue,
+                "Expected value: " + expectedValue + ", but actual value: " + actualValue);
+    }
 
-//getListLaptop        homePage.open()
-//                .getListCategories();
-//        List<WebElement> webLinks = homePage.getListCategories();
-//        assertEquals(16, webLinks.size());
+    @DataProvider(name = "laptop")
+    public Object[][] getFilter() {
+        return new Object[][]{
+                {"Acer", 60},
+                {"Apple", 17},
+                {"Dell", 60},
+        };
     }
 
 }
