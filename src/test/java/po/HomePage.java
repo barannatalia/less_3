@@ -9,6 +9,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import test.java.utils.PropertyLoader;
 
 import java.util.List;
 
@@ -39,7 +40,6 @@ public class HomePage extends BasePage{
         wait = new WebDriverWait(this.driver, 10);
         PageFactory.initElements(driver, this);
     }
-
 
     public HomePage open() {
         logger.info("Open");

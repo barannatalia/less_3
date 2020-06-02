@@ -2,3 +2,5 @@
 *.ilm
 target
 *.exe
+allure-results/
+allure-report/
