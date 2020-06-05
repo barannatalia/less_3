@@ -2,17 +2,18 @@ pipeline{
     agent any
 
     stages{
-        stage("First1"){
+        stage("Preparation"){
             steps {
-                echo 'Hello'
+                echo 'Download updates'
+                gst 'https://github.com/barannatalia/less_3.git'
             }
         }
-        stage("First2"){
+        stage("Unit test"){
             steps {
-                echo 'Hello'
+                bat 'mvn clean -DsuitXmlFile=unit_testng.xml test'
             }
         }
-        stage("First3"){
+        stage("UI test"){
             steps {
                 echo 'Hello'
             }
